@@ -8,22 +8,37 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
-        mono: ['DM Mono', 'monospace'],
+        sans:  ['Inter', 'Helvetica Neue', 'system-ui', 'sans-serif'],
+        serif: ['Source Serif 4', 'Georgia', 'serif'],
+        mono:  ['DM Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
-        brand: {
-          50:  '#f0f4ff',
-          100: '#dce6ff',
-          200: '#b9ceff',
-          300: '#84aaff',
-          400: '#4d7fff',
-          500: '#1a56ff',
-          600: '#0036e6',
-          700: '#002ac0',
-          800: '#00239c',
-          900: '#001f80',
+        // Cyber Orange scale — 500 = primary brand (#FA582D)
+        cyber: {
+          50:  '#FFF3EE',
+          100: '#FFBF9C',
+          200: '#FF9E75',
+          300: '#FF7F56',
+          400: '#FF724D',
+          500: '#FA582D',
+          600: '#B23808',
+          700: '#8C2C06',
+          800: '#661F04',
+          900: '#190000',
         },
+        // GTM secondary palette — use sparingly for status/badges
+        gtm: {
+          cloudBlue:    '#00C0E8',
+          cortexGreen:  '#00CC66',
+          unit42Red:    '#C84727',
+          strataYellow: '#FFCB06',
+        },
+      },
+      backgroundImage: {
+        // Cyber Orange → near-black gradient (top→bottom, per brand spec)
+        'cyber-gradient': 'linear-gradient(to bottom, #FA582D, #190000)',
+        // Diagonal variant
+        'cyber-gradient-diagonal': 'linear-gradient(135deg, #FA582D, #190000)',
       },
     },
   },

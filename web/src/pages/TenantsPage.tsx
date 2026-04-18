@@ -10,6 +10,8 @@ function StatusBadge({ status }: { status: string | null }) {
   const lower = status.toLowerCase()
   if (lower === 'ok' || lower === 'success') return <span className="badge-green">{status}</span>
   if (lower === 'error' || lower === 'failed') return <span className="badge-red">{status}</span>
+  if (lower === 'rate_limited' || lower === 'rate limited') return <span className="badge-yellow">{status}</span>
+  if (lower === 'info') return <span className="badge-blue">{status}</span>
   return <span className="badge-yellow">{status}</span>
 }
 

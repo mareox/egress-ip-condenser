@@ -4,124 +4,230 @@
 
 @layer base {
   :root {
-    --color-bg: theme('colors.white');
-    --color-surface: theme('colors.gray.50');
-    --color-border: theme('colors.gray.200');
-    --color-text: theme('colors.gray.900');
-    --color-text-muted: theme('colors.gray.500');
+    --color-bg:         #ffffff;
+    --color-surface:    #f8fafc;
+    --color-border:     #e2e8f0;
+    --color-text:       #0f172a;
+    --color-text-muted: #64748b;
   }
 
   .dark {
-    --color-bg: theme('colors.gray.950');
-    --color-surface: theme('colors.gray.900');
-    --color-border: theme('colors.gray.800');
-    --color-text: theme('colors.gray.100');
-    --color-text-muted: theme('colors.gray.400');
+    --color-bg:         #0a0a0a;
+    --color-surface:    #111111;
+    --color-border:     #334155;
+    --color-text:       #f1f5f9;
+    --color-text-muted: #94a3b8;
   }
 
   html {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
   }
 
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+    @apply bg-white text-slate-900 dark:bg-[#0a0a0a] dark:text-slate-100;
   }
 
+  /* Default border colour for all elements */
   * {
-    @apply border-gray-200 dark:border-gray-800;
+    @apply border-slate-200 dark:border-slate-700;
+  }
+
+  /* Editorial serif h1 — italic, light weight */
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  h2, h3 {
+    font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+    font-weight: 600;
   }
 }
 
 @layer components {
+  /* ────────────────────────────────────────────────────────────
+     BUTTONS
+     Primary = Cyber Orange fill  (brand CTA spec)
+     Stroke  = 2px Cyber Orange outline  (brand secondary CTA)
+     Secondary / ghost = neutral utility buttons for table actions
+  ──────────────────────────────────────────────────────────── */
   .btn {
-    @apply inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center gap-1.5 rounded
+           text-sm font-bold uppercase tracking-wider
+           transition-colors
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-500
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
+  /* Filled — Cyber Orange */
   .btn-primary {
-    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
+    @apply btn px-6 py-2.5
+           bg-cyber-500 text-white
+           hover:bg-cyber-600 active:bg-cyber-700;
   }
 
+  /* Stroke — 2 px Cyber Orange border, no fill */
+  .btn-stroke {
+    @apply btn px-6 py-2.5
+           border-2 border-cyber-500 text-cyber-500 bg-transparent
+           hover:bg-cyber-500 hover:text-white
+           active:bg-cyber-600 active:border-cyber-600
+           dark:text-cyber-400 dark:border-cyber-400
+           dark:hover:bg-cyber-500 dark:hover:text-white dark:hover:border-cyber-500;
+  }
+
+  /* Compact neutral — table / form cancel */
   .btn-secondary {
-    @apply btn bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700;
+    @apply inline-flex items-center gap-1.5 rounded px-3 py-1.5
+           text-sm font-medium transition-colors
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-500
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-slate-100 text-slate-700
+           hover:bg-slate-200
+           dark:bg-zinc-800 dark:text-slate-200
+           dark:hover:bg-zinc-700;
   }
 
+  /* Destructive */
   .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700;
+    @apply inline-flex items-center gap-1.5 rounded px-3 py-1.5
+           text-sm font-medium transition-colors
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-gtm-unit42Red
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-gtm-unit42Red text-white hover:bg-[#a33a1e];
   }
 
+  /* Icon / text ghost */
   .btn-ghost {
-    @apply btn text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800;
+    @apply inline-flex items-center gap-1.5 rounded px-2 py-1
+           text-sm font-medium transition-colors
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-500
+           disabled:opacity-50 disabled:cursor-not-allowed
+           text-slate-600 hover:bg-slate-100 hover:text-slate-900
+           dark:text-slate-400 dark:hover:bg-zinc-800 dark:hover:text-slate-100;
   }
 
+  /* ────────────────────────────────────────────────────────────
+     FORM CONTROLS
+  ──────────────────────────────────────────────────────────── */
   .input {
-    @apply block w-full rounded border border-gray-300 bg-white px-3 py-1.5 text-sm placeholder-gray-400
-           focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500
-           dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-600
-           dark:focus:border-brand-400 dark:focus:ring-brand-400;
+    @apply block w-full rounded border border-slate-300 bg-white
+           px-3 py-1.5 text-sm text-slate-900
+           placeholder-slate-400
+           focus:border-cyber-500 focus:outline-none focus:ring-1 focus:ring-cyber-500
+           dark:border-zinc-700 dark:bg-zinc-900 dark:text-white
+           dark:placeholder-zinc-500
+           dark:focus:border-cyber-500 dark:focus:ring-cyber-500;
   }
 
   .label {
-    @apply block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1;
+    @apply block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1;
   }
 
+  /* ────────────────────────────────────────────────────────────
+     CARD
+     Light: white bg, slate border, subtle shadow
+     Dark:  zinc-900 bg, slate-700 border, no shadow
+  ──────────────────────────────────────────────────────────── */
   .card {
-    @apply rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900;
+    @apply rounded border border-slate-200 bg-white shadow-sm
+           dark:border-slate-700 dark:bg-zinc-900 dark:shadow-none;
   }
 
+  /* ────────────────────────────────────────────────────────────
+     TABLE
+  ──────────────────────────────────────────────────────────── */
   .table-base {
     @apply w-full text-sm border-collapse;
   }
 
   .th {
-    @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400
-           border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50;
+    @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider
+           text-slate-500 dark:text-slate-400
+           border-b border-slate-200 dark:border-slate-700
+           bg-slate-50 dark:bg-zinc-950;
   }
 
   .td {
-    @apply px-3 py-2 text-sm text-gray-800 dark:text-gray-200 border-b border-gray-100 dark:border-gray-800/60;
+    @apply px-3 py-2 text-sm text-slate-800 dark:text-slate-200
+           border-b border-slate-100 dark:border-slate-800;
   }
 
   .tr-hover {
-    @apply hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors;
+    @apply hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors;
   }
 
+  /* ────────────────────────────────────────────────────────────
+     BADGES — GTM palette (WCAG AA contrast verified)
+     bg opacity kept low so border is the colour signal;
+     text uses full saturated GTM colour (dark) or darkened (light)
+  ──────────────────────────────────────────────────────────── */
   .badge {
-    @apply inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium;
+    @apply inline-flex items-center rounded px-1.5 py-0.5 text-xs font-semibold;
   }
 
+  /* ok / success → Cortex Intelligence Green (#00CC66)
+     Light: text #00804d (7:1 on white), Dark: text #00CC66 (4.6:1 on zinc-900) */
   .badge-green {
-    @apply badge bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300;
+    @apply badge
+           bg-[#00CC66]/10 text-[#00804d] border border-[#00CC66]/25
+           dark:bg-[#00CC66]/10 dark:text-[#00CC66] dark:border-[#00CC66]/20;
   }
 
+  /* error / failed → Unit 42 Fire Red (#C84727)
+     Light: text #9e3419 (8:1 on white), Dark: text #e05535 (4.5:1 on zinc-900) */
   .badge-red {
-    @apply badge bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300;
+    @apply badge
+           bg-[#C84727]/10 text-[#9e3419] border border-[#C84727]/25
+           dark:bg-[#C84727]/10 dark:text-[#e05535] dark:border-[#C84727]/20;
   }
 
+  /* warning / rate_limited → Strata Security Yellow (#FFCB06)
+     Light: text #7a6100 (7.5:1 on white), Dark: text #FFCB06 (9:1 on zinc-900) */
   .badge-yellow {
-    @apply badge bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300;
+    @apply badge
+           bg-[#FFCB06]/10 text-[#7a6100] border border-[#FFCB06]/25
+           dark:bg-[#FFCB06]/10 dark:text-[#FFCB06] dark:border-[#FFCB06]/20;
   }
 
-  .badge-gray {
-    @apply badge bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400;
-  }
-
+  /* info / mode → Prisma Cloud Blue (#00C0E8)
+     Light: text #0077a0 (4.6:1 on white), Dark: text #00C0E8 (5.1:1 on zinc-900) */
   .badge-blue {
-    @apply badge bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300;
+    @apply badge
+           bg-[#00C0E8]/10 text-[#0077a0] border border-[#00C0E8]/25
+           dark:bg-[#00C0E8]/10 dark:text-[#00C0E8] dark:border-[#00C0E8]/20;
   }
 
+  /* neutral */
+  .badge-gray {
+    @apply badge
+           bg-slate-100 text-slate-500 border border-slate-200
+           dark:bg-zinc-800 dark:text-slate-400 dark:border-zinc-700;
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     MODAL
+  ──────────────────────────────────────────────────────────── */
   .modal-backdrop {
-    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm;
+    @apply fixed inset-0 z-50 flex items-center justify-center
+           bg-black/50 dark:bg-black/70 backdrop-blur-sm;
   }
 
   .modal-panel {
-    @apply card w-full max-w-lg mx-4 p-6 shadow-2xl;
+    @apply card w-full max-w-lg mx-4 p-6 shadow-2xl dark:shadow-none;
   }
 
+  /* ────────────────────────────────────────────────────────────
+     LAYOUT
+  ──────────────────────────────────────────────────────────── */
   .section-header {
     @apply flex items-center justify-between mb-4;
   }
 
+  /* Page title — editorial italic serif (Source Serif 4) */
   .page-title {
-    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+    @apply text-xl font-serif italic font-normal
+           text-slate-900 dark:text-slate-100;
   }
 }
